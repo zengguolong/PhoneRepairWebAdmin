@@ -30,7 +30,7 @@ const actions = {
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
-      }).catch(error => {
+      }).catch(error => {       
         reject(error)
       })
     })
@@ -41,17 +41,15 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-
         const { name, avatar } = data
-
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', avatar)       
         resolve(data)
       }).catch(error => {
+        console.log('getInfo error')
         reject(error)
       })
     })
@@ -87,4 +85,3 @@ export default {
   mutations,
   actions
 }
-

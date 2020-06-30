@@ -13,14 +13,14 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="商品名">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="图片" width="200" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.image }}</span>
         </template>
       </el-table-column>
       <el-table-column label="Pageviews" width="110" align="center">
@@ -28,15 +28,25 @@
           {{ scope.row.pageviews }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column class-name="status-col" label="状态" width="110" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column label="价格" width="200" align="center">
         <template slot-scope="scope">
+          <span>{{ scope.row.price }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="库存" width="200" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.stock }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="created_at" label="时间" width="200">
+        <template>
           <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          <span>2019-12-06</span>
         </template>
       </el-table-column>
     </el-table>
@@ -50,9 +60,8 @@ export default {
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+        0: '上架',
+        1: '下架'
       }
       return statusMap[status]
     }
@@ -70,7 +79,8 @@ export default {
     fetchData() {
       this.listLoading = true
       getList().then(response => {
-        this.list = response.data.items
+        console.log(response.data)
+        this.list = response.data
         this.listLoading = false
       })
     }

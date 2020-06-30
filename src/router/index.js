@@ -51,113 +51,128 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '后台管理', icon: 'dashboard' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/manager',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/manager', //重定向地址，在面包屑中点击会重定向去的地址
+    name: 'Manager', // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
+    meta: { title: '管理', icon: 'example' },//title左侧边栏标题 ， icon图标
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'phone',
+        name: 'PhoneManager',
+        component: () => import('@/views/manager/phone'),
+        meta: { title: '手机管理', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'notice',
+        name: 'NoticeManager',
+        component: () => import('@/views/manager/notice'),
+        meta: { title: '公告栏管理', icon: 'tree' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        path: 'order',
+        name: 'OrderManager',
+        component:() => import('@/views/manager/order'),
+        meta: { title: '订单管理', icon: 'table'}
+      },
+      {
+        path: 'worker',
+        name: 'WorkerManager',
+        component:() => import('@/views/manager/worker'),
+        meta: { title: '维修师傅管理', icon: 'table'}
+      },
+      {
+        path: 'label',
+        name: 'LabelManager',
+        component:() => import('@/views/manager/labels'),
+        meta: { title: '手机标签管理', icon: 'table'}
+      },
+      {
+        path: 'user',
+        name: 'UserManager',
+        component:() => import('@/views/manager/user'),
+        meta: { title: '用户管理', icon: 'table'}
       }
     ]
   },
 
   {
-    path: 'external-link',
+    path: '/add',
     component: Layout,
+    redirect: '/add', //重定向地址，在面包屑中点击会重定向去的地址
+    name: 'Add',
+    meta: { title: '添加', icon: 'example' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'addPhone',
+        name: 'AddPhone',
+        component: () => import('@/views/add/add_phone'),
+        meta: { title: '添加手机', icon: 'form' }
+      },
+      {
+        path: 'addNotice',
+        name: 'AddNotice',
+        component: () => import('@/views/add/add_notice'),
+        meta: { title: '添加公告栏', icon: 'form' }
+      },
+      {
+        path: 'addLabel',
+        name: 'AddLabel',
+        component: () => import('@/views/add/add_label'),
+        meta: { title: '添加手机标签', icon: 'form' }
+      },
+      {
+        path: 'addRepair',
+        name: 'AddRepair',
+        component: () => import('@/views/add/add_repair'),
+        meta: { title: '添加维修人员', icon: 'form' }
       }
     ]
   },
+  {
+    path: '/edit',
+    component: Layout,
+    redirect: '/edit', //重定向地址，在面包屑中点击会重定向去的地址
+    name: 'Edit',
+    meta: { title: '编辑', icon: 'example' },
+    hidden : true,
+    children: [
+      {
+        path: 'editPhone',
+        name: 'EditPhone',
+        component: () => import('@/views/edit/edit_phone'),
+        meta: { title: '编辑手机产品', icon: 'form' },
+        hidden : true,
+      },
+      {
+        path: 'editNotice',
+        name: 'EditNotice',
+        component: () => import('@/views/edit/edit_notice'),
+        meta: { title: '编辑公告栏信息', icon: 'form' },
+        hidden : true,
+      },
+      {
+        path: 'editLabel',
+        name: 'EditLabel',
+        component: () => import('@/views/edit/edit_label'),
+        meta: { title: '编辑手机标签', icon: 'form' },
+        hidden :true,
+      },
+      {
+        path: 'editRepair',
+        name: 'EditRepair',
+        component: () => import('@/views/edit/edit_repair'),
+        meta: { title: '编辑维修人员', icon: 'form' },
+        hidden : true,
+      }
+    ]
+  },
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
